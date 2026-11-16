@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lattice Risk | The AI-Native MGA</title>
+<style>
+  :root { --ink:#0b1220; --accent:#4ade80; --paper:#f5f7fa; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; color:#fff; background:var(--ink); }
+  .hero { position:relative; height:100vh; min-height:560px; overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center; }
+  .hero video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .hero::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(11,18,32,.55),rgba(11,18,32,.85)); z-index:1; }
+  .hero .content { position:relative; z-index:2; max-width:760px; padding:24px; }
+  .tag { letter-spacing:.2em; font-size:.8rem; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+  h1 { font-size:clamp(2.4rem,6vw,4.4rem); line-height:1.05; margin-bottom:18px; }
+  .sub { font-size:1.2rem; opacity:.9; margin-bottom:32px; }
+  .btn { display:inline-block; background:var(--accent); color:var(--ink); padding:16px 34px; border-radius:999px; font-weight:700; text-decoration:none; font-size:1.05rem; transition:transform .15s; }
+  .btn:hover { transform:translateY(-2px); }
+  section.xf { background:var(--paper); color:var(--ink); padding:64px 24px; }
+  .xf .wrap { max-width:720px; margin:0 auto; }
+  .xf h2 { font-size:2rem; margin-bottom:8px; }
+  .xf p.lead { margin-bottom:24px; color:#4a5568; }
+  .card { background:#fff; border-radius:16px; padding:28px; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+  label { display:block; font-weight:600; margin:16px 0 6px; }
+  input[type=range] { width:100%; }
+  select { width:100%; padding:10px; border-radius:8px; border:1px solid #cbd5e0; font-size:1rem; }
+  .out { margin-top:24px; padding:20px; border-radius:12px; background:var(--ink); color:#fff; text-align:center; }
+  .out .num { font-size:2.4rem; font-weight:800; color:var(--accent); }
+  .out small { opacity:.7; }
+  .desc { max-width:720px; margin:28px auto 0; font-size:.95rem; color:#4a5568; }
+  footer { background:var(--ink); padding:24px; text-align:center; opacity:.7; font-size:.85rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <video autoplay loop muted playsinline preload="auto" poster="">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="content">
+    <div class="tag">Lattice Risk &middot; AI-Native MGA</div>
+    <h1>Commercial property insurance, underwritten at the speed of AI.</h1>
+    <p class="sub">We turn messy submissions into bindable quotes in minutes, not days.</p>
+    <a class="btn" href="about.html">Explore the Vision &rarr;</a>
+  </div>
+</header>
+
+<section class="xf">
+  <div class="wrap">
+    <h2>Instant Indication Estimator</h2>
+    <p class="lead">Try the kind of speed our platform delivers. Adjust the inputs for a ballpark premium.</p>
+    <div class="card">
+      <label for="tiv">Total insured value: <strong id="tivOut">$5M</strong></label>
+      <input type="range" id="tiv" min="1" max="50" value="5">
+      <label for="cons">Construction</label>
+      <select id="cons">
+        <option value="0.8">Fire resistive</option>
+        <option value="1" selected>Masonry non-combustible</option>
+        <option value="1.3">Frame</option>
+      </select>
+      <label for="zone">Wind / hail exposure</label>
+      <select id="zone">
+        <option value="0.7">Low</option>
+        <option value="1" selected>Moderate</option>
+        <option value="1.6">High (coastal / hail alley)</option>
+      </select>
+      <div class="out">
+        <div class="num" id="prem">$0</div>
+        <small>Illustrative annual premium. Not an actual quote.</small>
+      </div>
+    </div>
+    <p class="desc"><strong>X-Factor:</strong> An interactive estimator that instantly recalculates an illustrative property premium as you change value, construction and catastrophe exposure, showing how fast AI-driven underwriting can feel.</p>
+  </div>
+</section>
+
+<footer>&copy; 2026 Lattice Risk. Concept built for SMU Cox Generative AI for Business, Lab 5.</footer>
+
+<script>
+  const tiv=document.getElementById('tiv'), cons=document.getElementById('cons'), zone=document.getElementById('zone');
+  function calc(){
+    const v=+tiv.value;
+    document.getElementById('tivOut').textContent='$'+v+'M';
+    const prem=v*1e6*0.0035*cons.value*zone.value;
+    document.getElementById('prem').textContent='$'+Math.round(prem).toLocaleString();
+  }
+  [tiv,cons,zone].forEach(e=>e.addEventListener('input',calc)); calc();
+  document.querySelector('video').play().catch(()=>{});
+</script>
+
+<script> window.chtlConfig = { chatbotId: "1883497893" } </script>
+<script async data-id="1883497893" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+</body>
+</html>
